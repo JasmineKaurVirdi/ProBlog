@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+  .login-form {
+    width: 450px;
+    margin: 80px auto; 
+}
+.btn:hover {
+  background-color: #0056b3;
+  transition: all 0.3s ease;
+}
+</style>
+
+
+<h2 class="text-center">Login</h2>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+<form method="post" class="login-form card p-4 shadow-sm">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<p class="text-center">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+{% endblock %}

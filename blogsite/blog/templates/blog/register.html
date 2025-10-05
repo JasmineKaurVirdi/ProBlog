@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<style>
+    .register-form {
+    width: 450px;
+    margin: 40px auto;  
+} 
+.btn:hover {
+  background-color: #0056b3;
+  transition: all 0.3s ease;
+}
+</style>
+<h2 class="text-center">Register</h2>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post" class="register-form card p-4">
+  {% csrf_token %}
+
+  <div class="mb-3 ">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="password1" class="form-label">Password</label>
+    <input type="password" name="password1" class="form-control" placeholder="Enter password" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="password2" class="form-label">Confirm Password</label>
+    <input type="password" name="password2" class="form-control" placeholder="Confirm password" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

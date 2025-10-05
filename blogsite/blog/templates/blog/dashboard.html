@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Welcome, {{ user.username }}!</h2>
+        <p class="text-muted">{{ user.email }}</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-dark text-white text-center rounded-top-4">
+                    <h4 class="mb-0">Quick Links</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-plus-circle-fill text-success me-2"></i> Create New Post</span>
+                        <a class="btn btn-outline-success" href="{% url 'add_post' %}">Go</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-journal-text text-primary me-2"></i> View My Posts</span>
+                        <a class="btn btn-outline-primary" href="{% url 'user_posts' %}">Go</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-box-arrow-right text-danger me-2"></i> Logout</span>
+                        <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

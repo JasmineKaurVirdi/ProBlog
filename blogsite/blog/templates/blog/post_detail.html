@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<style>
+  .btn-secondary:hover {
+    background-color: #004080;
+    border-color: #004080;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card, .btn {
+    transition: all 0.3s ease-in-out;
+  }
+  
+</style>
+
+<article>
+<div class="col-sm-6">
+    <div class="card ">
+      <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <p class="card-text"> <small>by {{ post.author }} on {{ post.created_at|date:"F j, Y" }}</small></p>
+        <p class="card-text">{{ post.content }}</p>
+        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+</article>
+{% endblock %}

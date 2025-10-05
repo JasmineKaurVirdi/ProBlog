@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block title %}My Blog Posts{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">My Blog Posts</h2>
+
+{% if posts %}
+  {% for post in posts %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h4 class="card-title">{{ post.title }}</h4>
+        <p class="card-text"><small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small></p>
+        <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+        <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary btn-sm">View Post</a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p class="text-center">You haven't created any posts yet.</p>
+{% endif %}
+
+{% endblock %}
