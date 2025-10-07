@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Edit Post - {{ post.title }}{% endblock %}
+
+{% block content %}
+<style>
+  .edit-post {  /* same class as add_post */
+    width: 450px;
+    margin: 80px auto;
+  }
+
+  .btn:hover {
+    background-color: #1f701b;
+    transition: all 0.3s ease;
+  }
+</style>
+
+<h2 class="text-center mt-5">Edit Post</h2>
+
+<form method="post" class="edit-post card p-4 shadow-sm mt-5">
+  {% csrf_token %}
+  
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" name="title" id="title" class="form-control" value="{{ post.title }}" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="slug" class="form-label">Slug (URL-friendly)</label>
+    <input type="text" name="slug" id="slug" class="form-control" value="{{ post.slug }}" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea name="content" id="content" rows="7" class="form-control" required>{{ post.content }}</textarea>
+  </div>
+
+  <button type="submit" class="btn btn-success mb-2 w-100">Save Changes</button> 
+  <a href="{% url 'post_detail' post.slug %}" class="btn btn-secondary w-100">Cancel</a>
+</form>
+{% endblock %}

@@ -5,31 +5,32 @@
 <style>
   .add-post {
     width: 450px;
-    margin: 80px auto; 
-}
-.btn:hover {
-  background-color: #1f701b;
-  transition: all 0.3s ease;
-}
-</style>
-<h2 class="text-center">Add New Post</h2>
+    margin: 80px auto;
+  }
 
-<form method="post" class="add-post card p-4 shadow-sm">
+  .btn:hover {
+    background-color: #1f701b;
+    transition: all 0.3s ease;
+  }
+</style>
+<h2 class="text-center mt-5">Add New Post</h2>
+
+<form method="post" class="add-post card p-4 shadow-sm mt-5">
   {% csrf_token %}
 
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
-    <input type="text" name="title" id="title" class="form-control" value="{{ form.title.value }}" required>
+    <input type="text" name="title" id="title" class="form-control" value="" required>
   </div>
 
   <div class="mb-3">
     <label for="slug" class="form-label">Slug (URL-friendly)</label>
-    <input type="text" name="slug" id="slug" class="form-control" value="{{ form.slug.value }}" required>
+    <input type="text" name="slug" id="slug" class="form-control" value="" required>
   </div>
 
   <div class="mb-3">
     <label for="content" class="form-label">Content</label>
-    <textarea name="content" id="content" rows="7" class="form-control" required>{{ form.content.value }}</textarea>
+    <textarea name="content" id="content" rows="7" class="form-control" required></textarea>
   </div>
 
   <button type="submit" class="btn btn-success">Publish Post</button>

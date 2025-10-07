@@ -2,17 +2,42 @@
 {% block title %}My Blog Posts{% endblock %}
 
 {% block content %}
-<h2 class="text-center mb-4">My Blog Posts</h2>
+<style>
+  .btn-secondary:hover {
+    background-color: #004080;
+    border-color: #004080;
+  }
 
-{% if posts %}
+   .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card, .btn {
+    transition: all 0.3s ease-in-out;
+  }
+</style>
+<h2 class="text-center mb-4 mt-4">My Blog Posts</h2>
+
+<div class="container py-4">
+  {% if posts %}
+<div class="row">
   {% for post in posts %}
-    <div class="card mb-3">
+  <div class="col mb-4">
+  <div class="card h-100">
       <div class="card-body">
         <h4 class="card-title">{{ post.title }}</h4>
         <p class="card-text"><small class="text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</small></p>
         <p class="card-text">{{ post.content|truncatewords:30 }}</p>
-        <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary btn-sm">View Post</a>
-      </div>
+        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary btn-sm mt-2">View Post</a>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+    </div>
+    </div>
     </div>
   {% endfor %}
 {% else %}

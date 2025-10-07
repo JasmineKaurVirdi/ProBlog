@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Post
 from django.contrib.auth.models import User
-
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth import logout
-from .models import Post
+from .forms import PostForm
 
 def home(request):
     posts = Post.objects.all().order_by('-created_at')
@@ -82,6 +80,31 @@ def add_post(request):
 
     return render(request, 'blog/add_post.html', {'form': form})
 
+@login_required
+def edit_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+
+    if post.author != request.user:
+        messages.error(request, "You are not allowed to edit this post.")
+        return redirect ('user_posts')
+    
+    form = PostForm(request.POST or None, instance=post)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+        messages.success(request,"Post updated successfully!")
+        return redirect ('user_posts')
+    return render (request, 'blog/edit_post.html',{'form': form, 'post': post})
+
+@login_required
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.user == post.author:
+        if request.method == "POST":
+            post.delete()
+            return redirect('home')
+         
 
 @login_required
 def user_posts(request):
